@@ -14,6 +14,7 @@
     <router-link tag="button" class="btn btn-primary"
     :to="{ name: 'edit-post', params: { id: post.id }}"
       exact-active-class="active" >Edit </router-link>
+      <button  class="btn btn-danger" @click="deletePost(post.id)">Delete</button>
    
   </div>
 </div>
@@ -38,9 +39,25 @@ export default {
          }).catch((error)=> {
             console.log(error)
          })  
-  
-   
+  },
+  methods:{
+      deletePost(id){
+         let confirmDelete = confirm('Do you want to delete this post?')
+            if (confirmDelete) {
+              posts.delete(id)
+              .then((success) => {
+                let index = this.posts.findIndex((post) => {
+                return post.id == id})
+              this.posts.splice(index, 1)
+             this.$router.push({name: 'all-posts'})
+                    
+             })
+             .catch((error)=> {
+                console.log(error)
+         })  
+      }
   }
+ }
 }
 </script>
 <style>

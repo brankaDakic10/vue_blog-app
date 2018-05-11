@@ -52,7 +52,7 @@ export default {
             posts.edit(this.$route.params.id, this.newPost)
            .then((response)=> {
           
-            this.$router.push('/posts')
+            this.$router.push({name: 'all-posts'})
           }).catch((error)=>{
             console.log('Edit: '+ error)
          })  
@@ -63,7 +63,7 @@ export default {
            posts.add(this.newPost)
              .then((response)=> {
            
-             this.$router.push('/posts')
+             this.$router.push({name: 'all-posts'})
            }).catch((error)=>{
             console.log(error)
           
