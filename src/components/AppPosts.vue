@@ -7,7 +7,7 @@
   
   <div class="card-body">
     <h3 class="card-title">{{post.title}}</h3>
-    
+    <p>Number of comments: {{post.comments.length}}</p>
 
     <router-link :to="{ name: 'single-post', params: { id: post.id }}"
       exact-active-class="active" >View Post</router-link>

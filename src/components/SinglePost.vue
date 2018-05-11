@@ -3,15 +3,28 @@
       
       <section class="card" style="width: 18rem;">
         <div class="card-body">
-           <h5 class="card-title">{{post.title}}</h5>
+           <h3 class="card-title">{{post.title}}</h3>
             <p class="card-text">{{post.text}}</p>
       </div>
       </section>
+      <AddComment :postId="post.id" @commentAdded="addComment"/>
+       <section>
+           <h6>Comments:</h6>
+           <ul v-for="(comment, key) in post.comments"
+      :key="key">
+      <li>{{comment.text}}</li>
+      </ul>
+       </section>
   </div>
 </template>
 <script>
+import AddComment from './AddComment.vue'
 import {posts} from '../services/Posts'
 export default {
+     components: {
+     AddComment
+  },
+
      created() {
         if(this.$route.params.id){
         posts.get(this.$route.params.id)
@@ -27,6 +40,11 @@ export default {
     data(){
         return{
             post:{}
+        }
+    },
+    methods:{
+        addComment(comment){
+         this.post.comments.push(comment)
         }
     }
   
