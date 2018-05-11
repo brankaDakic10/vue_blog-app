@@ -9,8 +9,9 @@
   <div class="card-body">
     <h5 class="card-title">{{post.title}}</h5>
     
-    <p class="card-text">{{post.text}}</p>
-   
+
+    <router-link :to="{ name: 'single-post', params: { id: post.id }}"
+      exact-active-class="active" >View Post</router-link>
    
   </div>
 </div>
