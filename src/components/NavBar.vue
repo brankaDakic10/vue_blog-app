@@ -12,7 +12,7 @@
         <router-link class="nav-item nav-link" :to="{ name:'all-posts'}">Posts</router-link>
       </li>
       <li class="nav-item">
-        <a class="nav-item nav-link" >Example</a>
+         <router-link class="nav-item nav-link" :to="{ name:'add-post'}">Add</router-link>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
