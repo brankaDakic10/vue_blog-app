@@ -5,11 +5,11 @@
      <form @submit.prevent="submit">
             <div class="form-group">
                 <label for="title">Title:</label>
-                <input type="text" id="title" v-model="newPost.title" class="form-control"  placeholder=" Enter blog title " >
+                <input type="text" id="title" v-model="newPost.title" class="form-control"  placeholder=" Enter blog title " minlength="2"  required >
             </div>
             <div class="form-group">
                 <label for="text">Text:</label>
-                <input type="text" id="text" v-model="newPost.text" class="form-control"  placeholder=" Enter blog text " >
+                <input type="text" id="text" v-model="newPost.text" class="form-control"  placeholder=" Enter blog text " maxlength="300" required >
             </div>
             <div class="form-group">
             <button class="btn btn-success">Submit</button> 
