@@ -1,7 +1,7 @@
 <template>
   <div class="container">
    <article class="col-8">
-    <h4>Add new post</h4>
+    <h3>{{ this.$route.params.id ? 'Edit contact' : 'Add new contact'}}</h3>
      <form @submit.prevent="submit">
             <div class="form-group">
                 <label for="title">Title:</label>
@@ -13,7 +13,7 @@
             </div>
             <div class="form-group">
             <button class="btn btn-success">Submit</button> 
-            <button class="btn btn-info" type="reset">Reset</button> 
+            <button class="btn btn-info" type="reset" @reset="resetForm">Reset</button> 
             </div>
             
      </form>
@@ -24,6 +24,17 @@
 <script>
 import {posts} from '../services/Posts'
 export default {
+  created(){
+     if(this.$route.params.id){
+        posts.get(this.$route.params.id)
+        .then((response) => {
+            this.newPost=response.data
+           
+        }).catch((error) => {
+            console.log(error)
+        })
+      }
+  },
    
    data(){
      return{
@@ -35,15 +46,35 @@ export default {
    },
    methods:{
      submit(){
-       posts.add(this.newPost)
-        .then((response)=> {
-           this.$router.push('/posts')
+        
+          if(this.$route.params.id)
+          {
+            posts.edit(this.$route.params.id, this.newPost)
+           .then((response)=> {
+          
+            this.$router.push('/posts')
+          }).catch((error)=>{
+            console.log('Edit: '+ error)
+         })  
+          
+          }
+          else
+          {
+           posts.add(this.newPost)
+             .then((response)=> {
+           
+             this.$router.push('/posts')
            }).catch((error)=>{
             console.log(error)
           
           }) 
-     }
+          }
+     },
+     resetForm(){
+        this.newPost = {}
+    
    }
+  }
 }
 </script>
 

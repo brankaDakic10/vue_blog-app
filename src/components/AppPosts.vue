@@ -1,28 +1,25 @@
 <template>
- 
-     <div class="container">
+ <div class="container">
       
 
 <div class="card" style="width: 18rem;" v-for="(post, key) in posts"
       :key="key">
   
   <div class="card-body">
-    <h5 class="card-title">{{post.title}}</h5>
+    <h3 class="card-title">{{post.title}}</h3>
     
 
     <router-link :to="{ name: 'single-post', params: { id: post.id }}"
       exact-active-class="active" >View Post</router-link>
+    <router-link tag="button" class="btn btn-primary"
+    :to="{ name: 'edit-post', params: { id: post.id }}"
+      exact-active-class="active" >Edit </router-link>
    
   </div>
 </div>
 
+</div>
 
-
-  </div>
-
-
-
- 
 </template>
 <script>
 import {posts} from '../services/Posts'
